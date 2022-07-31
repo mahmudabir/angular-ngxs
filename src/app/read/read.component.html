@@ -1,1 +1,10 @@
-<p>read works!</p>
+<div class="right" *ngIf="tutorials$">
+
+    <h3>Tutorials</h3>
+    <ul>
+        <li (click)="deleteTutorial(tutorial.name)" *ngFor="let tutorial of tutorials$ | async">
+            <button>{{ tutorial.name }}</button>
+        </li>
+    </ul>
+
+</div>
