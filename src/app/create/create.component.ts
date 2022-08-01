@@ -10,13 +10,19 @@ import AddTutorial = TutorialAction.AddTutorial;
 })
 export class CreateComponent implements OnInit {
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {
+  }
 
   ngOnInit(): void {
   }
 
   addTutorial(name, url) {
-    this.store.dispatch(new AddTutorial({name: name, url: url}));
+    let count = 0;
+    for (let i = 0; i <= 10; i++) {
+      count = i;
+      console.log(count)
+      this.store.dispatch(new AddTutorial({ name: name + i, url: url }));
+    }
   }
 
 }
