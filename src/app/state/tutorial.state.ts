@@ -1,6 +1,7 @@
-import {Tutorial} from "../models/tutorial.model";
-import {Action, Selector, State, StateContext} from "@ngxs/store";
-import {TutorialAction} from "../actions/tutorial.action";
+import { Tutorial } from "../models/tutorial.model";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { TutorialAction } from "../actions/tutorial.action";
+import { Injectable } from "@angular/core";
 import AddTutorial = TutorialAction.AddTutorial;
 import RemoveTutorial = TutorialAction.RemoveTutorial;
 
@@ -16,6 +17,7 @@ export class TutorialStateModel {
         tutorials: []
     }
 })
+@Injectable()
 export class TutorialState {
 
     @Selector()

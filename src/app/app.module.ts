@@ -29,12 +29,14 @@ import CryptoJS from 'crypto-js';
     NgxsLoggerPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
       storage: StorageOption.LocalStorage,
+      // serialize: (state) => JSON.stringify(state), // no encryption
+      // deserialize: (state) => JSON.parse(state), // no encryption
       // serialize: (state) => btoa(JSON.stringify(state)), // base 64
       // deserialize: (state) => JSON.parse(atob(state)), // base 64
-      // serialize: (state) => CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET"), // AES
-      // deserialize: (state) => JSON.parse(CryptoJS.AES.decrypt(state,"SECRET").toString(CryptoJS.enc.Utf8)) // AES
-      serialize: (state) => btoa(CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET")), // base 64 & AES
-      deserialize: (state) => JSON.parse(CryptoJS.AES.decrypt(atob(state), "SECRET").toString(CryptoJS.enc.Utf8))
+      serialize: (state) => CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET"), // AES
+      deserialize: (state) => JSON.parse(CryptoJS.AES.decrypt(state,"SECRET").toString(CryptoJS.enc.Utf8)) // AES
+      // serialize: (state) => btoa(CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET")), // base 64 & AES
+      // deserialize: (state) => JSON.parse(CryptoJS.AES.decrypt(atob(state), "SECRET").toString(CryptoJS.enc.Utf8))
     })
   ],
   providers: [],
