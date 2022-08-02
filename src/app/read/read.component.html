@@ -1,5 +1,5 @@
 <div class="right" *ngIf="tutorials$">
-
+    <button (click)="refreshTutorials()">Refresh</button>
     <h3>Tutorials</h3>
     <ul>
         <li (click)="deleteTutorial(tutorial.name)" *ngFor="let tutorial of tutorials$ | async">
