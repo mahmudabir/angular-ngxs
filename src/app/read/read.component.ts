@@ -32,4 +32,9 @@ export class ReadComponent implements OnInit {
   refreshTutorials() {
       this.store.reset(JSON.parse(CryptoJS.AES.decrypt(localStorage['@@STATE'],"SECRET").toString(CryptoJS.enc.Utf8)));
   }
+
+  clearLocalStorage() {
+    // this.store.reset({});
+    // localStorage['@@STATE'] = CryptoJS.AES.decrypt(JSON.stringify(this.store.selectSnapshot(x=>x.state)),"SECRET");
+  }
 }
