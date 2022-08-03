@@ -32,7 +32,7 @@ export class CountState {
     increment(ctx: StateContext<CountStateModel>, action: IncrementCount) {
         const state = ctx.getState();
         ctx.patchState({
-            count: Number(state.count) + action.payload
+            count: Number(Number.isNaN(state.count) ? 0 : state.count) + action.payload
         });
     }
 
@@ -40,7 +40,7 @@ export class CountState {
     decrement(ctx: StateContext<CountStateModel>, action: DecrementCount) {
         const state = ctx.getState();
         ctx.patchState({
-            count: Number(state.count) - action.payload
+            count: Number(Number.isNaN(state.count) ? 0 : state.count) - action.payload
         });
     }
 }

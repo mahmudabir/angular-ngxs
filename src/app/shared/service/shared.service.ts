@@ -51,8 +51,8 @@ export class SharedService {
         state[key][key] = "";
       } else if (typeof state[key][key] == 'number') {
         //we can also check using: Number.isInteger(state[key][key])
-        state[key][key] = null;
-      } else {
+        state[key][key] = 0;
+      } else if(typeof state[key][key] != 'number' && typeof state[key][key] != 'string' && state[key] && !Array.isArray(state[key][key])) {
         state[key][key] = {};
       }
 
