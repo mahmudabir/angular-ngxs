@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from "@ngxs/store";
-import { TutorialAction } from "../actions/tutorial.action";
+import { TutorialAction } from '../../shared/actions/tutorial.action';
 import AddTutorial = TutorialAction.AddTutorial;
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-create-tutorial',
+  templateUrl: './create-tutorial.component.html',
+  styleUrls: ['./create-tutorial.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateTutorialComponent implements OnInit {
 
   constructor(private store: Store) {
   }

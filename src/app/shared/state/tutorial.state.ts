@@ -1,9 +1,10 @@
-import { Tutorial } from "../models/tutorial.model";
+
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { TutorialAction } from "../actions/tutorial.action";
 import { Injectable } from "@angular/core";
 import AddTutorial = TutorialAction.AddTutorial;
 import RemoveTutorial = TutorialAction.RemoveTutorial;
+import { TutorialAction } from "../actions/tutorial.action";
+import { Tutorial } from "../models/tutorial.model";
 
 
 export class TutorialStateModel {
@@ -21,12 +22,12 @@ export class TutorialStateModel {
 export class TutorialState {
 
     @Selector()
-    static getTutorials( state: TutorialStateModel) {
+    static getTutorials(state: TutorialStateModel) {
         return state.tutorials;
     }
 
     @Action(AddTutorial)
-    add({getState, patchState}: StateContext<TutorialStateModel>, {payload}: AddTutorial ) {
+    add({ getState, patchState }: StateContext<TutorialStateModel>, { payload }: AddTutorial) {
         const state = getState();
         patchState({
             tutorials: [...state.tutorials, payload]
@@ -34,9 +35,9 @@ export class TutorialState {
     }
 
     @Action(RemoveTutorial)
-    remove({getState, patchState}: StateContext<TutorialStateModel>, {payload}: RemoveTutorial ) {
+    remove({ getState, patchState }: StateContext<TutorialStateModel>, { payload }: RemoveTutorial) {
         patchState({
-            tutorials: getState().tutorials.filter(a=>a.name != payload)
+            tutorials: getState().tutorials.filter(a => a.name != payload)
         });
     }
 }

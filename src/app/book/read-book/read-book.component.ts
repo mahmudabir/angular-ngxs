@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from "@ngxs/store";
-import { TutorialState } from "../state/tutorial.state";
 import { Observable, of } from "rxjs";
-import { Tutorial } from "../models/tutorial.model";
-import { TutorialAction } from "../actions/tutorial.action";
 
 import CryptoJS from 'crypto-js';
 
-import RemoveTutorial = TutorialAction.RemoveTutorial;
+import RemoveBook = BookAction.RemoveBook;
+import { BookAction } from '../../shared/actions/book.action';
+import { BookState } from '../../shared/state/book.state';
+import { Book } from '../../shared/models/book.model';
 
 @Component({
-  selector: 'app-read',
-  templateUrl: './read.component.html',
-  styleUrls: ['./read.component.css']
+  selector: 'app-read-book',
+  templateUrl: './read-book.component.html',
+  styleUrls: ['./read-book.component.css']
 })
-export class ReadComponent implements OnInit {
+export class ReadBookComponent implements OnInit {
 
-  @Select(TutorialState.getTutorials) tutorials$: Observable<Tutorial[]>;
+  @Select(BookState.getTutorials) books$: Observable<Book[]>;
 
   constructor(private store: Store) {
   }
@@ -25,7 +25,7 @@ export class ReadComponent implements OnInit {
   }
 
   deleteTutorial(name) {
-    this.store.dispatch(new RemoveTutorial(name));
+    this.store.dispatch(new RemoveBook(name));
   }
 
 

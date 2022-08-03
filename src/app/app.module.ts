@@ -3,28 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReadComponent } from './read/read.component';
-import { CreateComponent } from './create/create.component';
 import { NgxsModule } from "@ngxs/store";
-import { TutorialState } from "./state/tutorial.state";
+import { TutorialState } from "./shared/state/tutorial.state";
 import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
 import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
 import { NgxsStoragePluginModule, StorageOption } from "@ngxs/storage-plugin";
 
 import CryptoJS from 'crypto-js';
+import { ReadTutorialComponent } from './tutorial/read-tutorial/read-tutorial.component';
+import { ReadBookComponent } from './book/read-book/read-book.component';
+import { CreateBookComponent } from './book/create-book/create-book.component';
+import { CreateTutorialComponent } from './tutorial/create-tutorial/create-tutorial.component';
+import { BookState } from './shared/state/book.state';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReadComponent,
-    CreateComponent
+    ReadTutorialComponent,
+    CreateTutorialComponent,
+    ReadBookComponent,
+    CreateBookComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxsModule.forRoot([
-      TutorialState
-    ]),
+    NgxsModule.forRoot([TutorialState, BookState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({

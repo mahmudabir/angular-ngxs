@@ -1,0 +1,11 @@
+<div class="right" *ngIf="books$">
+    <button (click)="refreshTutorials()">Refresh</button>
+    <button (click)="clearLocalStorage()">Clear</button>
+    <h3>Books</h3>
+    <ul>
+        <li (click)="deleteTutorial(tutorial.name)" *ngFor="let tutorial of books$ | async">
+            <button>{{ tutorial.name }}</button>
+        </li>
+    </ul>
+
+</div>

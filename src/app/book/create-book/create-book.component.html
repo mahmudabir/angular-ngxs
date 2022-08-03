@@ -1,0 +1,6 @@
+<div class="left">
+    <input type="text" placeholder="name" #name [autofocus]="true" (keyup.enter)="addTutorial(name.value, author.value)">
+    <input type="text" placeholder="author" #author>
+
+    <button (click)="addTutorial(name.value, author.value)">Add a tutorial</button>
+</div>

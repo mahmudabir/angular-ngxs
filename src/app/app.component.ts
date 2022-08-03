@@ -23,7 +23,7 @@ export class AppComponent {
     let source$ = fromEvent<StorageEvent>(window, 'storage');
 
     source$.subscribe(data => {
-      if (data.url == location.href) { // check if the change is in the localStorage
+      if (data.url == location.href) { // check if the change is in the localStorage        
         if (localStorage['@@STATE']) {
           this.store.reset(JSON.parse(CryptoJS.AES.decrypt(localStorage['@@STATE'],"SECRET").toString(CryptoJS.enc.Utf8)));
         }
