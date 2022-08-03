@@ -7,8 +7,6 @@ import { environment } from "../../../environments/environment";
 })
 export class SharedService {
 
-  readonly OBJ_FOR_AES = "SECRET";
-
   constructor() { }
 
   //region AES
