@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from "@ngxs/store";
-import { Observable, of } from "rxjs";
-
-import CryptoJS from 'crypto-js';
-
-import RemoveBook = BookAction.RemoveBook;
+import { Observable } from "rxjs";
 import { BookAction } from '../../shared/actions/book.action';
 import { BookState } from '../../shared/state/book.state';
 import { Book } from '../../shared/models/book.model';
+import { SharedService } from "../../shared/service/shared.service";
+import RemoveBook = BookAction.RemoveBook;
 
 @Component({
   selector: 'app-read-book',
@@ -16,7 +14,7 @@ import { Book } from '../../shared/models/book.model';
 })
 export class ReadBookComponent implements OnInit {
 
-  @Select(BookState.getTutorials) books$: Observable<Book[]>;
+  @Select(BookState.getBooks) books$: Observable<Book[]>;
 
   constructor(private store: Store) {
   }
@@ -30,11 +28,10 @@ export class ReadBookComponent implements OnInit {
 
 
   refreshTutorials() {
-      this.store.reset(JSON.parse(CryptoJS.AES.decrypt(localStorage['@@STATE'],"SECRET").toString(CryptoJS.enc.Utf8)));
+    this.store.reset(SharedService.decryptAESJsonObject(localStorage['@@STATE']));
   }
 
-  clearLocalStorage() {
-    // this.store.reset({});
-    // localStorage['@@STATE'] = CryptoJS.AES.decrypt(JSON.stringify(this.store.selectSnapshot(x=>x.state)),"SECRET");
+  clearState() {
+    this.store.reset(SharedService.clearState());
   }
 }

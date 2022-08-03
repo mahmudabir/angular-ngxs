@@ -4,6 +4,7 @@ import { Store } from "@ngxs/store";
 import * as lodash from "lodash"
 
 import CryptoJS from 'crypto-js';
+import { SharedService } from "./shared/service/shared.service";
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent {
     source$.subscribe(data => {
       if (data.url == location.href) { // check if the change is in the localStorage        
         if (localStorage['@@STATE']) {
-          this.store.reset(JSON.parse(CryptoJS.AES.decrypt(localStorage['@@STATE'],"SECRET").toString(CryptoJS.enc.Utf8)));
+          this.store.reset(SharedService.decryptAESJsonObject(localStorage['@@STATE']));
         }
 
       }

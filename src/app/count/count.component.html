@@ -1,0 +1,8 @@
+<div class="center" *ngIf="count$">
+    <button (click)="increment()">Increment</button>
+    <h2>Counter</h2>
+    <button (click)="decrement()">Decrement</button>
+    <br>
+
+</div>
+<h3 class="center">{{count$ | async}}</h3>

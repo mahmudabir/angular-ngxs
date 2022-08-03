@@ -21,22 +21,22 @@ export class BookStateModel {
 export class BookState {
 
     @Selector()
-    static getTutorials(state: BookStateModel) {
+    static getBooks(state: BookStateModel) {
         return state.books;
     }
 
     @Action(AddBook)
-    add({ getState, patchState }: StateContext<BookStateModel>, { payload }: AddBook) {
-        const state = getState();
-        patchState({
-            books: [...state.books, payload]
+    add(ctx: StateContext<BookStateModel>, action: AddBook) {
+        const state = ctx.getState();
+        ctx.patchState({
+            books: [...state.books, action.payload]
         });
     }
 
     @Action(RemoveBook)
-    remove({ getState, patchState }: StateContext<BookStateModel>, { payload }: RemoveBook) {
-        patchState({
-            books: getState().books.filter(a => a.name != payload)
+    remove(ctx: StateContext<BookStateModel>, action: RemoveBook) {
+        ctx.patchState({
+            books: ctx.getState().books.filter(a => a.name != action.payload)
         });
     }
 }

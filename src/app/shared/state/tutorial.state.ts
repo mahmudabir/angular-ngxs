@@ -27,17 +27,17 @@ export class TutorialState {
     }
 
     @Action(AddTutorial)
-    add({ getState, patchState }: StateContext<TutorialStateModel>, { payload }: AddTutorial) {
-        const state = getState();
-        patchState({
-            tutorials: [...state.tutorials, payload]
+    add(ctx: StateContext<TutorialStateModel>, action: AddTutorial) {
+        const state = ctx.getState();
+        ctx.patchState({
+            tutorials: [...state.tutorials, action.payload]
         });
     }
 
     @Action(RemoveTutorial)
-    remove({ getState, patchState }: StateContext<TutorialStateModel>, { payload }: RemoveTutorial) {
-        patchState({
-            tutorials: getState().tutorials.filter(a => a.name != payload)
+    remove(ctx: StateContext<TutorialStateModel>, action: RemoveTutorial) {
+        ctx.patchState({
+            tutorials: ctx.getState().tutorials.filter(a => a.name != action.payload)
         });
     }
 }

@@ -9,12 +9,14 @@ import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
 import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
 import { NgxsStoragePluginModule, StorageOption } from "@ngxs/storage-plugin";
 
-import CryptoJS from 'crypto-js';
 import { ReadTutorialComponent } from './tutorial/read-tutorial/read-tutorial.component';
 import { ReadBookComponent } from './book/read-book/read-book.component';
 import { CreateBookComponent } from './book/create-book/create-book.component';
 import { CreateTutorialComponent } from './tutorial/create-tutorial/create-tutorial.component';
 import { BookState } from './shared/state/book.state';
+import { SharedService } from "./shared/service/shared.service";
+import { CountComponent } from './count/count.component';
+import { CountState } from "./shared/state/count.state";
 
 @NgModule({
   declarations: [
@@ -22,24 +24,25 @@ import { BookState } from './shared/state/book.state';
     ReadTutorialComponent,
     CreateTutorialComponent,
     ReadBookComponent,
-    CreateBookComponent
+    CreateBookComponent,
+    CountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxsModule.forRoot([TutorialState, BookState]),
+    NgxsModule.forRoot([TutorialState, BookState, CountState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
       storage: StorageOption.LocalStorage,
       // serialize: (state) => JSON.stringify(state), // no encryption
       // deserialize: (state) => JSON.parse(state), // no encryption
-      // serialize: (state) => btoa(JSON.stringify(state)), // base 64
-      // deserialize: (state) => JSON.parse(atob(state)), // base 64
-      serialize: (state) => CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET"), // AES
-      deserialize: (state) => JSON.parse(CryptoJS.AES.decrypt(state,"SECRET").toString(CryptoJS.enc.Utf8)) // AES
-      // serialize: (state) => btoa(CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET")), // base 64 & AES
-      // deserialize: (state) => JSON.parse(CryptoJS.AES.decrypt(atob(state), "SECRET").toString(CryptoJS.enc.Utf8))
+      // serialize: (state) => SharedService.encryptBase64JsonObject(state), // base 64
+      // deserialize: (state) => SharedService.decryptBase64JsonObject(state), // base 64
+      serialize: (state) => SharedService.encryptAESJsonObject(state),//CryptoJS.AES.encrypt(JSON.stringify(state), "SECRET"), // AES
+      deserialize: (state) => SharedService.decryptAESJsonObject(state)//JSON.parse(CryptoJS.AES.decrypt(state,"SECRET").toString(CryptoJS.enc.Utf8)) // AES
+      // serialize: (state) => SharedService.encryptAESBase64JsonObject(state), // base 64 & AES
+      // deserialize: (state) => SharedService.decryptAESBase64JsonObject(state) // base 64 & AES
     })
   ],
   providers: [],
