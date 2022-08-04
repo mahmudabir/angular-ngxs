@@ -17,6 +17,7 @@ import { BookState } from './shared/state/book.state';
 import { SharedService } from "./shared/service/shared.service";
 import { CountComponent } from './count/count.component';
 import { CountState } from "./shared/state/count.state";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -31,8 +32,13 @@ import { CountState } from "./shared/state/count.state";
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([TutorialState, BookState, CountState]),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production
+    }),
+    NgxsLoggerPluginModule.forRoot({
+      collapsed: true,
+      disabled: environment.production
+    }),
     NgxsStoragePluginModule.forRoot({
       storage: StorageOption.LocalStorage,
       // serialize: (state) => JSON.stringify(state), // no encryption
