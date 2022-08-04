@@ -32,6 +32,7 @@ import { environment } from "../environments/environment";
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([TutorialState, BookState, CountState]),
+    // NgxsModule.forFeature([TutorialState, BookState, CountState]), // use it in lazy loaded module for state lazy loading
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
     }),
