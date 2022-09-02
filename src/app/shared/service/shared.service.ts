@@ -44,7 +44,6 @@ export class SharedService {
   static clearState() {
     let state = SharedService.decryptAESJsonObject(localStorage['@@STATE']);
     Object.keys(state).map(key => {
-      console.log(state[key]);
       if (state[key] && Array.isArray(state[key][key])) {
         state[key][key] = [];
       } else if (typeof state[key][key] == 'string') {
